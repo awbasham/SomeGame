@@ -15,7 +15,7 @@ public class TileSet {
         Return true if successful
          */
 
-        tiles[row - 1][col - 1] = tile;
+        tiles[row][col] = tile;
         return false;
     }
 

@@ -1,6 +1,6 @@
 package GameLoop;
 
-import Levels.TileSet;
+import Levels.Level1;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,9 +16,9 @@ public class Screen {
     JFrame app;
     Canvas canvas;
     BufferStrategy buffer;
-    Graphics graphics;
     Graphics2D g2d;
     LevelRenderer levelRenderer;
+    Level1 level1;
 
     public Screen(int WIDTH, int HEIGHT) {
         app = new JFrame("Some Game");
@@ -36,9 +36,9 @@ public class Screen {
         canvas.createBufferStrategy(2);
         buffer = canvas.getBufferStrategy();
 
-        graphics = null;
         g2d = null;
-        levelRenderer = new LevelRenderer();
+        level1 = new Level1();
+        levelRenderer = new LevelRenderer(level1.load());
     }
 
     public void render() {
