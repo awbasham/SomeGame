@@ -1,8 +1,14 @@
 package GameLoop;
 
+import Levels.TileSet;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 // Still learning how to render with Swing.. This will be updated to handle rendering everything for the game
 public class Screen {
@@ -12,6 +18,7 @@ public class Screen {
     BufferStrategy buffer;
     Graphics graphics;
     Graphics2D g2d;
+    LevelRenderer levelRenderer;
 
     public Screen(int WIDTH, int HEIGHT) {
         app = new JFrame("Some Game");
@@ -31,24 +38,39 @@ public class Screen {
 
         graphics = null;
         g2d = null;
+        levelRenderer = new LevelRenderer();
     }
 
     public void render() {
             try {
-                graphics = buffer.getDrawGraphics();
-                graphics.setColor(Color.black);
-                graphics.fillRect(0, 0, 639, 479);
+                g2d = (Graphics2D)buffer.getDrawGraphics();
+                g2d.setColor(Color.gray);
+                g2d.fillRect(0, 0, 639, 479);
 
-                graphics.setColor(Color.BLUE);
-                graphics.fillRect(300, 200, 100, 100);
+                levelRenderer.generateView(g2d);
 
                 if (!buffer.contentsLost()) {
                     buffer.show();
                 }
             } finally {
-                if (graphics != null) {
-                    graphics.dispose();
+                if (g2d != null) {
+                    g2d.dispose();
                 }
             }
+    }
+
+    private BufferedImage getTileTexture() {
+        File file;
+        String imgPath = "/assets/testFile.png";
+
+        try {
+            file = new File(imgPath);
+            BufferedImage img = ImageIO.read(file);
+            return img;
+        } catch (IOException e) {
+            System.out.println("Failed to get file");
+            e.getMessage();
+        }
+        return null;
     }
 }
