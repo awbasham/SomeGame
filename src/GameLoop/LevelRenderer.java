@@ -11,9 +11,20 @@ import java.io.IOException;
 public class LevelRenderer {
 
     private TileSet tileset;
+    private File file;
+    private BufferedImage img;
+    private Image tile1;
 
     public LevelRenderer(TileSet tileset) {
         this.tileset = tileset;
+        file = new File("C:\\Users\\Adam\\Desktop\\SomeGame\\assets\\testTile.png");
+
+        try {
+            img = ImageIO.read(file);
+            tile1 = img.getScaledInstance(img.getWidth() / 4, (Integer)img.getHeight() / 4, Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.getMessage();
+        }
     }
 
     public void generateView(Graphics2D g2d) {
@@ -25,25 +36,11 @@ public class LevelRenderer {
     }
 
     private Image getTileTexture(TileSet tileSet, int row, int col) {
-        File file;
         int id = tileSet.getTile(row, col).getId();
-        String imgPath;
 
         switch (id) {
-            case 1: imgPath = "C:\\Users\\Adam\\Desktop\\SomeGame\\assets\\testTile.png";
-                break;
-            default: imgPath = "";
-                break;
+            case 1: return tile1;
+            default: return null;
         }
-
-        try {
-            file = new File(imgPath);
-            BufferedImage img = ImageIO.read(file);
-            Image tmpImg = img.getScaledInstance(img.getWidth() / 4, (Integer)img.getHeight() / 4, Image.SCALE_SMOOTH);
-            return tmpImg;
-        } catch (IOException e) {
-            e.getMessage();
-        }
-        return null;
     }
 }
