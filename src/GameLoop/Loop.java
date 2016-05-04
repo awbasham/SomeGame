@@ -43,12 +43,14 @@ public class Loop {
                 loops++;
             }
 
-            interpolation = ((float)(getTickCount() + SKIP_TICKS - nextGameTick) / (float)(SKIP_TICKS));
-            //display_game(interpolation); Render game here
-            screen.render();
+            if (getFPS(fps) <= 60) { // Cap Rendering FPS to 60
 
-            fps++;
-            getFPS(fps);
+                interpolation = ((float) (getTickCount() + SKIP_TICKS - nextGameTick) / (float) (SKIP_TICKS));
+                //display_game(interpolation); Render game here
+                screen.render();
+
+                fps++;
+            }
         }
     }
 

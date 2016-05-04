@@ -12,16 +12,22 @@ public class LevelRenderer {
 
     private TileSet tileset;
     private File file;
+    private File file2;
     private BufferedImage img;
+    private BufferedImage img2;
     private Image tile1;
+    private Image tile2;
 
     public LevelRenderer(TileSet tileset) {
         this.tileset = tileset;
         file = new File("C:\\Users\\Adam\\Desktop\\SomeGame\\assets\\testTile.png");
+        file2 = new File("C:\\Users\\Adam\\Desktop\\SomeGame\\assets\\testTile1.png");
 
         try {
             img = ImageIO.read(file);
             tile1 = img.getScaledInstance(img.getWidth() / 4, (Integer)img.getHeight() / 4, Image.SCALE_SMOOTH);
+            img2 = ImageIO.read(file2);
+            tile2 = img2.getScaledInstance(img2.getWidth() / 4, (Integer) img2.getHeight() / 4, Image.SCALE_SMOOTH);
         } catch (IOException e) {
             e.getMessage();
         }
@@ -40,6 +46,7 @@ public class LevelRenderer {
 
         switch (id) {
             case 1: return tile1;
+            case 2: return tile2;
             default: return null;
         }
     }
