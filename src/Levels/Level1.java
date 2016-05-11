@@ -17,8 +17,8 @@ public class Level1 extends Level {
     private float factorX;
     private float factorY;
 
-    private static int[][] level = {{2, 1, 1, 1, 1, 1, 1, 1, 2, 3}, {2, 1, 1, 1, 1, 2, 1, 0, 0, 0}, {2, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {2, 1, 1, 2, 2, 1, 1, 0, 0, 0},
-            {2, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {2, 1, 1, 1, 2, 1, 1, 0, 0, 0}, {2, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {2, 1, 1, 2, 1, 1, 1, 0, 0, 0}, {2, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {2, 1, 2, 1, 1, 1, 1, 0, 0, 0}};
+    private static int[][] level = {{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 2, 2, 2, 2, 2, 2, 2, 2, 3}};
 
     public Level1(Screen screen) {
         scW = screen.getWidth();
@@ -56,13 +56,11 @@ public class Level1 extends Level {
     public synchronized void mapUpdate(Screen screen) {
         int originX = screen.getWidth() / 10;
         int originY = screen.getHeight() / 10;
-        factorX = (screen.getWidth() / (float)scW);
-        factorY = (screen.getHeight() / (float)scH);
 
         for (int i = 0; i < tileset.getRows(); i++) {
             for (int j = 0; j < tileset.getCols(); j++) {
-                tileset.getTile(i, j).setX((int)(originX * i));
-                tileset.getTile(i, j).setY((int)(originY * j));
+                tileset.getTile(i, j).setX((originX * j));
+                tileset.getTile(i, j).setY((originY * i));
             }
         }
 

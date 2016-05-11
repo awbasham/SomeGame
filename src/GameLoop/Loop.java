@@ -43,14 +43,15 @@ public class Loop {
                 loops++;
             }
 
-            if (getFPS(fps) <= 60) { // Cap Rendering FPS to 60
+            //if (getFPS(fps) <= 60) { // Cap Rendering FPS to 60
 
                 interpolation = ((float) (getTickCount() + SKIP_TICKS - nextGameTick) / (float) (SKIP_TICKS));
                 //display_game(interpolation); Render game here
                 screen.render();
 
                 fps++;
-            }
+            System.out.println(getFPS(fps));
+            //}
         }
     }
 
@@ -67,7 +68,7 @@ public class Loop {
             this.fps = 0;
         }
 
-        //System.out.println(fps / ((FPSTimer1 - FPSTimer2) / 1000));
+        System.out.println(fps / ((FPSTimer1 - FPSTimer2) / 1000));
         return (fps / ((FPSTimer1 - FPSTimer2) / 1000));
     }
 }
