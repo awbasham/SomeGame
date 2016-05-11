@@ -67,7 +67,9 @@ public class Screen implements ComponentListener {
     @Override
     public void componentResized(ComponentEvent e) {
         canvas.setSize(app.getContentPane().getWidth(), app.getContentPane().getHeight());
-        level1.mapUpdate(this);
+        if (level1 != null) {
+            level1.mapUpdate(this);
+        }
     }
 
     @Override

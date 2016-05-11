@@ -11,7 +11,7 @@ public class Level {
         tileset = new TileSet(level.length, level[0].length);
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level[0].length; j++) {
-                tileset.addTile(new Tile(level[i][j], i * screen.getWidth() / 10, j * screen.getHeight() / 10), i, j);
+                tileset.addTile(new Tile(level[i][j], j * screen.getWidth() / 10, i * screen.getHeight() / 10), i, j);
             }
         }
         return tileset;
