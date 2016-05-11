@@ -15,6 +15,7 @@ public class Screen implements ComponentListener {
     BufferStrategy buffer;
     Graphics2D g2d;
     Level1 level1;
+    Color skyBlue;
 
     public Screen(int WIDTH, int HEIGHT) {
         app = new JFrame("Some Game");
@@ -35,13 +36,14 @@ public class Screen implements ComponentListener {
 
         g2d = null;
         level1 = new Level1(this);
+
+        skyBlue = new Color(135, 206, 250);
     }
 
     public void render() {
         try {
             g2d = (Graphics2D) buffer.getDrawGraphics();
-            g2d.setColor(Color.gray);
-            g2d.setBackground(Color.gray);
+            g2d.setColor(skyBlue);
             g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
             level1.draw(g2d);
@@ -66,7 +68,7 @@ public class Screen implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        canvas.setSize(app.getContentPane().getWidth(), app.getContentPane().getHeight());
+        //canvas.setSize(app.getContentPane().getWidth(), app.getContentPane().getHeight());
         if (level1 != null) {
             level1.mapUpdate(this);
         }

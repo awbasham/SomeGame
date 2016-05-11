@@ -10,21 +10,21 @@ public class TileSet {
 
 
     public boolean addTile(Tile tile, int row, int col) {
-        /*TODO
-        Handle adding a tile to the 2d array
-        Return true if successful
-         */
-
-        tiles[row][col] = tile;
-        return false;
+        if (row >= getRows() || col >= getCols() || row < 0 || col < 0) {
+            return false;
+        } else {
+            tiles[row][col] = tile;
+            return true;
+        }
     }
 
     public boolean removeTile(int row, int col) {
-        /*TODO
-        Handle removing tile from 2d array, given the row and column position
-        Return true if successful
-         */
-        return false;
+        if (row >= getRows() || col >= getCols() || row < 0 || col < 0) {
+            return false;
+        } else {
+            tiles[row][col] = null;
+            return true;
+        }
     }
 
     public int getRows() {
