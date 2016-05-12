@@ -47,7 +47,7 @@ public class Loop {
 
                 interpolation = ((float) (getTickCount() + SKIP_TICKS - nextGameTick) / (float) (SKIP_TICKS));
                 //display_game(interpolation); Render game here
-                screen.render();
+                screen.render(interpolation);
 
                 fps++;
             }

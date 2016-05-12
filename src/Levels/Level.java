@@ -23,7 +23,7 @@ public class Level {
         }
     }
 
-    public void draw(Graphics2D g2d) {
+    public void draw(Graphics2D g2d, float interpolation) {
         for (int i = 0; i < tileset.getRows(); i++) {
             for (int j = 0; j < tileset.getCols(); j++) {
                 g2d.drawImage(getTileTexture(i, j), tileset.getTile(i, j).getX(), tileset.getTile(i, j).getY(), null);

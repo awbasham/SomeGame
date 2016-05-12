@@ -40,13 +40,13 @@ public class Screen implements ComponentListener {
         skyBlue = new Color(135, 206, 250);
     }
 
-    public void render() {
+    public void render(float interpolation) {
         try {
             g2d = (Graphics2D) buffer.getDrawGraphics();
             g2d.setColor(skyBlue);
             g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-            level1.draw(g2d);
+            level1.draw(g2d, interpolation);
 
             if (!buffer.contentsLost()) {
                 buffer.show();
