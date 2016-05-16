@@ -23,6 +23,7 @@ public class Level {
         }
     }
 
+    // Draws the tiles in the level TileSet
     public void draw(Graphics2D g2d, float interpolation) {
         for (int i = 0; i < tileset.getRows(); i++) {
             for (int j = 0; j < tileset.getCols(); j++) {
@@ -31,7 +32,7 @@ public class Level {
         }
     }
 
-    //OVERRIDE on level creation
+    //OVERRIDE on level creation class i.e. Level1 (to choose which tile id gives which image)
     public Image getTileTexture(int row, int col) {
         int id = tileset.getTile(row, col).getId();
 
@@ -40,6 +41,7 @@ public class Level {
         }
     }
 
+    //Adds resized map tiles to an ArrayList to be accessed later
     public void generateMapImages(BufferedImage mapImage, Screen screen, int tileWidth, int tileHeight) {
         mapTiles = new ArrayList<Image>();
         for (int i = 0; i * tileHeight < mapImage.getHeight(); i++) {
@@ -49,6 +51,7 @@ public class Level {
         }
     }
 
+    //Resets each Tile X and Y origin based on new screen size
     public synchronized void mapUpdate(Screen screen) {
         int originX = screen.getWidth() / 10;
         int originY = screen.getHeight() / 10;
@@ -60,10 +63,12 @@ public class Level {
             }
         }
 
+        //Clears sized tile images and re-adds with the new correct size
         mapTiles.clear();
         generateMapImages(mapImage, screen, 70, 70);
     }
 
+    //Method to set the tile sheet used for pulling all sub-images off of
     public void setMapImage(File file) {
         try {
             mapImage = ImageIO.read(file);

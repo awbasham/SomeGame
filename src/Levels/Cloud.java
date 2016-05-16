@@ -1,13 +1,14 @@
 package Levels;
 
 import GameLoop.Screen;
+import GameLoop.Updatable;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Cloud {
+public class Cloud implements Updatable {
     private int INIT_X;
     private int x;
     private int y;
@@ -50,13 +51,16 @@ public class Cloud {
         speedX = screen.getWidth() / 200;
     }
 
-    public void draw(Graphics2D g2d, float interpolation) {
+    public void draw(Graphics2D g2d) {
+        g2d.drawImage(getCloud(), getX(), getY(), null);
+    }
+
+    public void update(float interpolation) {
         int moveX = (int)(speedX * interpolation);
         this.setX(this.getX() - moveX);
 
         if (this.getX() <= 0 - getCloud().getWidth(null)) {
             this.setX(INIT_X);
         }
-        g2d.drawImage(getCloud(), getX(), getY(), null);
     }
 }

@@ -1,6 +1,6 @@
 package GameLoop;
 
-import Levels.Level1;
+import GameObject.GameContext;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -14,14 +14,17 @@ public class Screen implements ComponentListener {
     Canvas canvas;
     BufferStrategy buffer;
     Graphics2D g2d;
-    Level1 level1;
     Color skyBlue;
+    GameContext ctx;
 
-    public Screen(int WIDTH, int HEIGHT) {
+    public Screen(GameContext ctx, int WIDTH, int HEIGHT) {
+        this.ctx = ctx;
+
         app = new JFrame("Some Game");
         app.setIgnoreRepaint(true); // Ignore OS messages to repaint
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.addComponentListener(this);
+
 
         canvas = new Canvas();
         canvas.setIgnoreRepaint(true); // Ignore OS messages to repaint
@@ -35,7 +38,6 @@ public class Screen implements ComponentListener {
         buffer = canvas.getBufferStrategy();
 
         g2d = null;
-        level1 = new Level1(this);
 
         skyBlue = new Color(135, 206, 250);
     }
@@ -46,7 +48,7 @@ public class Screen implements ComponentListener {
             g2d.setColor(skyBlue);
             g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-            level1.draw(g2d, interpolation);
+            ctx.getLevel().draw(g2d, interpolation);
 
             if (!buffer.contentsLost()) {
                 buffer.show();
@@ -68,9 +70,8 @@ public class Screen implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        //canvas.setSize(app.getContentPane().getWidth(), app.getContentPane().getHeight());
-        if (level1 != null) {
-            level1.mapUpdate(this);
+        if (ctx.getLevel() != null) {
+            ctx.getLevel().mapUpdate(this);
         }
     }
 
